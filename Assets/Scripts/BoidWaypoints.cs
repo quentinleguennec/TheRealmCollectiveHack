@@ -20,6 +20,12 @@
             currentWaypointIndex = 0;
         }
 
+        private void Awake()
+        {
+            // Example use of a waypoint. Can be dragged in the editor at runtime.
+            // AddWaypoint(Vector3.zero);
+        }
+
         public Transform AddWaypoint(Vector3 position)
         {
             Transform newWaypoint = new GameObject().transform;

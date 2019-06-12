@@ -13,7 +13,7 @@
     {
         public BoidSettings()
         {
-            ResetWithBirdBoid();
+            ResetWithFishBoid();
         }
 
         private float separationOptimalDistance = 0.3f;
@@ -100,7 +100,6 @@
         public Vector3 Velocity { get; private set; } = Vector3.zero;
         public Quaternion Rotation { get; private set; } = Quaternion.identity;
         public int[] NeighborsIndexes { get; private set; } = new int[0];
-        public BoidAudioSource AudioSource { get; set; }
 
         private new Rigidbody rigidbody;
         private bool didComputeThisFrame = false;
@@ -327,16 +326,6 @@
         //Force between birds and obstacles
         //We make an asumption that between an obstacle and a bird on the distance OptDistance should exists same
         //force as between two birds on the same distance
-
-        // Maple:
-        // restart;
-        // f := x-> factor2*(factor1/x^2 - 1);
-        // Mult := 2 * SpeedMultipliyer; #When collision occurs between birds each bird has a force vector and total force is twise bigger than between wall and bird. That's why we're  multiplying force
-        // F := { f(ViewRadius) = 0, f(OptDistance) = Mult * sepForceAtOptDistance }:
-        // Res := solve( F, {factor1, factor2} );
-        // RealConsts := {ViewRadius = 0.5, OptDistance = 0.1, sepForceAtOptDistance = 0.05, SpeedMultipliyer = 3};
-        // plot( eval(f(x), eval(Res, RealConsts) ), x = 0..eval(ViewRadius, RealConsts) );
-
         static public bool ComputeCollisionAvoidanceForce(Vector3 currentPosition, Vector3 boidDirection, Collider obstacleCollider, Vector3 pointOnBounds, out Force force, BoidSettings boidSettings)
         {
             Vector3 reversedDirection = currentPosition - pointOnBounds;
